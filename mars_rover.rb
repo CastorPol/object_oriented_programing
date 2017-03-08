@@ -33,34 +33,34 @@ class Rover
     end
   end
 
-  def turn
-    puts "current direction is #{@direction} use L or R to rotate the rover 90 degress Left or Right."
-    puts "please enter a direction"
-    rotate = gets.chomp
+  def turn(dir)
+    #puts "current direction is #{@direction} use L or R to rotate the rover 90 degress Left or Right."
+    #puts "please enter a direction"
+    #rotate = gets.chomp
 
-      if rotate == "L" && @direction == "N"
+      if dir == "L" && @direction == "N"
         @direction = "W"
         puts "direction is now #{@direction}"
-      elsif rotate == "L" && @direction == "W"
+      elsif dir == "L" && @direction == "W"
         @direction = "S"
         puts "direction is now #{@direction}"
-      elsif rotate == "L" && @direction == "S"
+      elsif dir == "L" && @direction == "S"
         @direction = "E"
         puts "direction is now #{@direction}"
-      elsif rotate == "L" && @direction == "E"
+      elsif dir == "L" && @direction == "E"
         @direction = "N"
         puts "direction is now #{@direction}"
 
-      elsif rotate == "R" && @direction == "N"
+      elsif dir == "R" && @direction == "N"
         @direction = "E"
         puts "direction is now #{@direction}"
-      elsif rotate == "R" && @direction == "E"
+      elsif dir == "R" && @direction == "E"
         @direction = "S"
         puts "direction is now #{@direction}"
-      elsif rotate == "R" && @direction == "S"
+      elsif dir == "R" && @direction == "S"
         @direction = "W"
         puts "direction is now #{@direction}"
-      elsif rotate == "R" && @direction == "W"
+      elsif dir == "R" && @direction == "W"
         @direction = "N"
         puts "direction is now #{@direction}"
       else
@@ -75,8 +75,25 @@ x = gets.chomp.to_i
 puts "provide starting y-coordiante"
 y = gets.chomp.to_i
 puts "provide starting direction (N,E,S,W)"
-dir = gets.chomp
+heading = gets.chomp
 
-rover1 = Rover.new(x, y, dir)
+rover1 = Rover.new(x, y, heading)
+
+rover1.location
+
+puts "use L, R, or M to move or turn the rover"
+instructions = gets.chomp.split
+
+instructions.each do |ins|
+  if ins == "L"
+    rover1.turn(ins)
+  elsif ins == "R"
+    rover1.turn(ins)
+  elsif ins == "M"
+    rover1.move
+  else
+    puts "command not found"
+  end
+end
 
 rover1.location
